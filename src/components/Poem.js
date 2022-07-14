@@ -1,14 +1,24 @@
-import React from "react";
+import React, {useState} from "react";
 
-function Poem() {
+function Poem( {poem} ) {
+
+  const [isMarkAsRead, setIsMarkAsRead] = useState(true)
+
+  function handleReadClick(event) {
+    setIsMarkAsRead(!isMarkAsRead)
+  }
   return (
     <div>
-      <h3>Title</h3>
-      <p>Content</p>
+      <h3>{poem.title}</h3>
+      <p>{poem.content}</p>
       <p>
-        <strong>- By Author</strong>
+        <strong>{poem.author}</strong>
       </p>
-      <button>Mark as read</button>
+      {isMarkAsRead ? (
+        <button onClick={handleReadClick}>Mark as read</button>
+      ) : (
+        <button onClick={handleReadClick}>Mark as unread</button>
+      )}
     </div>
   );
 }
