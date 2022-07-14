@@ -1,6 +1,13 @@
 import React, {useState} from "react";
 
-function Poem( {poem} ) {
+function Poem( {poem, deletePoem} ) {
+
+  function handleDelete(event) {
+  fetch(`http://localhost:8004/poems/${poem}`, {
+    method: "DELETE",
+  }) 
+  deletePoem(poem);    
+}
 
   const [isMarkAsRead, setIsMarkAsRead] = useState(true)
 
@@ -19,6 +26,7 @@ function Poem( {poem} ) {
       ) : (
         <button onClick={handleReadClick}>Mark as unread</button>
       )}
+      <button onClick={handleDelete}>Delete</button>
     </div>
   );
 }

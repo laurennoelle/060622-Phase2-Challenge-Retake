@@ -17,6 +17,11 @@ function App() {
     setIsHide(!isHide)
   }
 
+  function deletePoem(poem) {
+    const oneLessPoem = poems.filter((poem) => poem.id !== poem)
+    setPoems(oneLessPoem)
+  }
+
   useEffect(() => {
     fetch(API)
     .then((res) => res.json())
@@ -30,7 +35,7 @@ function App() {
         <button onClick={handleHideClick}>Show/hide new poem form</button>
         {isHide ? <NewPoemForm addNewPoem={addNewPoem}/> : null}
       </div>
-      <PoemsContainer poems={poems}/>
+      <PoemsContainer poems={poems} deletePoem={deletePoem}/>
     </div>
   );
 }
